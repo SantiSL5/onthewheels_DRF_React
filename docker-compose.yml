@@ -1,0 +1,74 @@
+version: '3.3'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres 
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=$POSTGRES_DATABASE
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+    networks:
+      - drfr-network
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    healthcheck:
+      test: pg_isready -U $POSTGRES_USER -d $POSTGRES_DATABASE
+      interval: 5s
+      timeout: 3s
+      retries: 3
+      start_period: 2s
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: $PGADMIN_EMAIL
+      PGADMIN_DEFAULT_PASSWORD: $PGADMIN_PASSWORD
+    logging:
+      driver: "none"
+    ports:
+      - 6969:80
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - drfr-network
+
+  backend:
+    build:
+      context: ./docker
+      target: drf
+    container_name: backend_drfr
+    command: python3 manage.py runserver 0.0.0.0:8000
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./backend/:/app
+    ports:
+      - "8000:8000"
+    networks:
+      - drfr-network
+
+  frontend:
+    build:
+      context: ./docker
+      target: react
+    container_name: frontend_drfr
+    command: npm run start
+    depends_on:
+      backend:
+        condition: service_started
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./frontend/:/app
+    ports:
+      - "3000:3000"
+    networks:
+      - drfr-network
+
+networks:
+  drfr-network:
