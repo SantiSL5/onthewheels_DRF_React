@@ -1,11 +1,12 @@
 from django.db import models
-
+from onthewheels.apps.core.models import TimestampedModel
 # Create your models here.
 
-class Bicycle(models.Model):
+class Bicycle(TimestampedModel):
     serial_number = models.CharField(db_index=True, unique=True, max_length=255)
-    created_on = models.DateTimeField(auto_now_add=True)
-
+    station = models.ForeignKey(
+        'stations.Station', on_delete=models.DO_NOTHING, related_name='stations'
+    )
     class Meta:
         # Gives the proper plural name for admin
         verbose_name_plural = "Bicycles"

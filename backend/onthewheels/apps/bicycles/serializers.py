@@ -3,12 +3,13 @@ from .models import Bicycle
 
 class BicycleSerializer(serializers.ModelSerializer):
     serial_number = serializers.CharField(db_index=True, max_length=255, unique=True)
-    created_on = serializers.DateTimeField()
-
+    station = models.ForeignKey(
+        'stations.Station', on_delete=models.DO_NOTHING, related_name='stations'
+    )
 
     class Meta:
         model = Bicycle
         fields = (
             'serial_number',
-            'created_on',
+            'station'
         )
