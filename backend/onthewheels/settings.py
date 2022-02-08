@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecurelocal-&syyk#ntb_5txgb_ib%rv6oul0h_e*s0wkiygcr0=@vz(
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    
+    "localhost",
 ]
 
 
@@ -39,14 +39,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'corsheaders',
+
     'onthewheels.apps.bicycles',
     'onthewheels.apps.stations',
+    'onthewheels.apps.authentication',
+    'onthewheels.apps.profiles',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -125,7 +131,30 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+CORS_ORIGIN_WHITELIST = (
+    'http://0.0.0.0:3001',
+    'http://localhost:3001',
+)
+
+# Tell Django about the custom `User` model we created. The string
+# `authentication.User` tells Django we are referring to the `User` model in
+# the `authentication` module. This module is registered above in a setting
+# called `INSTALLED_APPS`.
+AUTH_USER_MODEL = 'authentication.User'
+
+REST_FRAMEWORK = {
+    'EXCEPTION_HANDLER': 'onthewheels.apps.core.exceptions.core_exception_handler',
+    'NON_FIELD_ERRORS_KEY': 'error',
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'onthewheels.apps.authentication.backends.JWTAuthentication',
+    ),
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    # 'PAGE_SIZE': 20,
+}
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

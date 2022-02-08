@@ -21,7 +21,7 @@ class onthebykeJSONRenderer(JSONRenderer):
         # the default JSONRenderer to handle rendering errors, so we need to
         # check for this case.
         elif data.get('errors', None) is not None:
-            return super(ConduitJSONRenderer, self).render(data)
+            return super(onthewheelsJSONRenderer, self).render(data)
 
         else:
             return json.dumps({
