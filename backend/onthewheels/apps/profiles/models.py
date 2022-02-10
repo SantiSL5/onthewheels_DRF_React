@@ -26,11 +26,11 @@ class Profile(TimestampedModel):
     # As mentioned in the text, this relationship will be one-way. Just because
     # you are following mean does not mean that I am following you. This is
     # what `symmetrical=False` does for us.
-    follows = models.ManyToManyField(
-        'self',
-        related_name='followed_by',
-        symmetrical=False
-    )
+    # follows = models.ManyToManyField(
+    #     'self',
+    #     related_name='followed_by',
+    #     symmetrical=False
+    # )
 
     # favorites = models.ManyToManyField(
     #     'articles.Article',

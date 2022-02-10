@@ -28,7 +28,7 @@ profile_detail = ProfileViewSet.as_view({
 
 urlpatterns = [
     url(r'^profiles/(?P<username>\w+)/?$', ProfileRetrieveAPIView.as_view()),
-    url(r'^profiles/(?P<username>\w+)/follow/?$', ProfileFollowAPIView.as_view()),
+    # url(r'^profiles/(?P<username>\w+)/follow/?$', ProfileFollowAPIView.as_view()),
     
     #Admin
     url(r'^profilelist/$', profile_list, name='profile_list'),                                      

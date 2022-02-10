@@ -4,12 +4,30 @@ from onthewheels.apps.core.models import TimestampedModel
 
 class Bicycle(TimestampedModel):
     serial_number = models.CharField(db_index=True, unique=True, max_length=255)
-    station = models.ForeignKey(
-        'stations.Station', on_delete=models.DO_NOTHING, related_name='stations'
+    number = models.AutoField(unique=True)
+    battery = models.IntegerField(
+        default=100,
+        validators=[
+            MaxValueValidator(100),
+            MinValueValidator(0)
+        ]
     )
+    warning = models.BooleanField(default=False)
+    disabled = models.BooleanField(default=False)
     class Meta:
         # Gives the proper plural name for admin
         verbose_name_plural = "Bicycles"
     
     def __str__(self):
-        return self.serial_number
+        return self.number
+    
+class Bicycle_User(TimestampedModel):
+    user = models.ForeignKey(
+        'authentication.User', on_delete=models.CASCADE, related_name='users'
+    )
+    station = models.ForeignKey(
+        'bicycles.Bicycle', on_delete=models.CASCADE, related_name='bicycles'
+    )
+    class Meta:
+        # Gives the proper plural name for admin
+        verbose_name_plural = "Bicycles_Users"
