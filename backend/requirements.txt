@@ -1,5 +1,5 @@
 asgiref==3.4.1
-Django==4.0.1
+Django==4.0.2
 djangorestframework
 djangorestframework-jwt==1.11.0
 django-environ-2==2.3.0
