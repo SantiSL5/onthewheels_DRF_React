@@ -105,3 +105,4 @@ yarn-error.log*
 
 data
 **/node_modules
+**/examples-cypress
