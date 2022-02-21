@@ -1,6 +1,8 @@
 import React, { Suspense } from "react";
 import { Link, Route, Switch } from "wouter";
-import Navbar from './components/NavBar'
+import NavbarApp from './components/NavBar'
+import Footer from './components/Footer'
+import Cookies from './components/Cookies'
 import './App.css';
 
 const HomePage = React.lazy(() => import("./pages/Home"));
@@ -15,7 +17,7 @@ export function App() {
                 <img alt="Logo" src="/logo.png" />
               </figure>
             </Link> */}
-            <Navbar/>
+            <NavbarApp/>
             <Switch>
                 <Route component={HomePage} path="/" />
                 {/* <Route
@@ -27,6 +29,8 @@ export function App() {
                 <Route component={Register} path="/register" />
                 <Route component={ErrorPage} path="/:rest*" /> */}
             </Switch>
+            <Footer/>
+            <Cookies/>
           </section>
         </Suspense>
       </div>
