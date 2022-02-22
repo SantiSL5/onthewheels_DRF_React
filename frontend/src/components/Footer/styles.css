@@ -1,3 +1,16 @@
+footer {
+    position: relative;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
 svg {
     margin-left: 10px;
+}
+
+.cookiespol {
+    margin-left: 10px;
+    text-decoration: none;
+    color: inherit;
 }

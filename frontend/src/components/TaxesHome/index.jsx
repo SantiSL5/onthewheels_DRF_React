@@ -1,13 +1,13 @@
 import React from 'react'
 import { Card, Button, Row, Footer } from 'react-bootstrap';
 import bicycleImg from '../../assets/img/bicycle.jpeg';
-// import "./styles.css";
+import './styles.css';
 
 export default function TaxesHome () {
     return(
         <>
             <h2 className='text-success'>Taxes</h2>
-            <Row md={3} className="g-0 mb-3 justify-content-md-center text-success">
+            <Row md={3} className="g-0 mb-3 justify-content-md-center text-success taxes">
                 <Card>
                     <Card.Img variant="top" src={bicycleImg} />
                     <Card.Body>
@@ -18,7 +18,7 @@ export default function TaxesHome () {
                     </ul>
                     </Card.Body>
                     <Card.Footer>
-                        <Button variant="primary">5€</Button>
+                        <Button className='button' variant="primary">5€</Button>
                     </Card.Footer>
                 </Card>
                 <Card>
@@ -32,7 +32,7 @@ export default function TaxesHome () {
                     </ul>
                     </Card.Body>
                     <Card.Footer>
-                        <Button variant="primary">15€</Button>
+                        <Button className='button' variant="primary">15€</Button>
                     </Card.Footer>
                 </Card>
             </Row>

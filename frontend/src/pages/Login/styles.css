@@ -1,0 +1,40 @@
+.buttons {
+    position: relative;
+    margin: 0 auto;
+    background: #ecf0f1;
+    width: 350px;
+    margin-top: 20vh;
+    border-radius: 35px 35px 0px 0px;
+    box-shadow: 3px 3px 10px #333;
+}
+
+.buttons button {
+    height: 30px;
+    border: 1px solid black;
+    width: 50%;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    font-size: 18px;
+}
+
+.buttons .regbutton {
+    border-radius: 35px 0px 0px 0px;
+    background: #e74c3c;
+}
+
+.buttons .logbutton {
+    border-radius: 0px 35px 0px 0px;
+    background: #e74c3c;
+}
+
+.buttons .regbutton:hover {
+    background: #e74d3c8a;
+}
+
+.buttons .logbutton:hover {
+    background: #e74d3c8a;
+}
